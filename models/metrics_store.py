@@ -65,8 +65,10 @@ class MetricStore:
                     avg_metric.add_label('stat', 'avg')
 
                     new_metrics.extend([min_metric, max_metric, avg_metric])
+                    # Reset the collection values for the next scrape interval
+                    # without deleting the key, so new values can be appended again
+                    self.metrics[key].value = []
 
-        self.metrics.clear()
         return new_metrics
 
 
